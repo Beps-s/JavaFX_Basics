@@ -17,17 +17,13 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) {
-        Button left = new Button("Left");
-        BorderPane.setAlignment(left, Pos.CENTER);
-        Button right = new Button("Left");
-        BorderPane.setAlignment(right, Pos.BOTTOM_LEFT);
+        BorderPane root = new BorderPane();
         Button top = new Button("Left");
         BorderPane.setAlignment(top, Pos.CENTER);
-        Button bottom = new Button("Left");
-        BorderPane.setAlignment(bottom, Pos.CENTER);
+        root.setTop(top);
 
         Button center = new Button("Center");
-        BorderPane root = new BorderPane(center, top, right, bottom, left);
+        root.setCenter(center);
 
         Scene scene = new Scene(root, 300, 150);
         stage.setScene(scene);
