@@ -1,6 +1,7 @@
 package ee.khk;
 
 import javafx.application.Application;
+import javafx.geometry.Orientation;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
@@ -29,7 +30,7 @@ public class Main extends Application {
 
 
 
-        FlowPane root = new FlowPane(10, 10, label1, label2, label3, label4, label5, label6, label7, label8, label9);
+        FlowPane root = new FlowPane(Orientation.VERTICAL, 10, 10, label1, label2, label3, label4, label5, label6, label7, label8, label9);
         Scene scene = new Scene(root);
         stage.setScene(scene);
 
