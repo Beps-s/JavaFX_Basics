@@ -20,7 +20,9 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
         Label headlbl = new Label("Press the login button");
+        StackPane.setAlignment(headlbl, Pos.TOP_CENTER);
         Label statuslbl = new Label("Start screen");
+        StackPane.setAlignment(statuslbl, Pos.BOTTOM_CENTER);
         Button loginBtn = new Button("Login");
 
         StackPane root = new StackPane(headlbl, statuslbl, loginBtn);
