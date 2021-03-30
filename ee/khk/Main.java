@@ -3,7 +3,9 @@ package ee.khk;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 
@@ -17,18 +19,16 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) {
-        BorderPane root = new BorderPane();
-        Button top = new Button("Left");
-        BorderPane.setAlignment(top, Pos.CENTER);
-        root.setTop(top);
+        Label headlbl = new Label("Press the login button");
+        Label statuslbl = new Label("Start screen");
+        Button loginBtn = new Button("Login");
 
-        Button center = new Button("Center");
-        root.setCenter(center);
+        StackPane root = new StackPane(headlbl, statuslbl, loginBtn);
 
         Scene scene = new Scene(root, 300, 150);
         stage.setScene(scene);
 
-        stage.setTitle("BorderPane in JavaFX");
+        stage.setTitle("StackPane in JavaFX");
 
         stage.show();
     }
