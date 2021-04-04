@@ -18,27 +18,12 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
 
-        Label selectedlbl = new Label();
-        Button selectedBtn = new Button("Select");
-
-        RadioButton javaBtn = new RadioButton("Java");
-        RadioButton jsBtn = new RadioButton("JavaScript");
-        RadioButton csharpBtn = new RadioButton("C#");
-
-        ToggleGroup group = new ToggleGroup();
-
-        javaBtn.setToggleGroup(group);
-        jsBtn.setToggleGroup(group);
-        csharpBtn.setToggleGroup(group);
-
-        selectedBtn.setOnAction(event -> {
-            RadioButton selected = (RadioButton) group.getSelectedToggle();
-            selectedlbl.setText("Selected: " + selected.getText());
-        });
-
-        FlowPane root = new FlowPane(Orientation.VERTICAL, 10, 10);
-        root.getChildren().addAll(javaBtn, jsBtn, csharpBtn, selectedBtn, selectedlbl);
-        root.setPadding(new Insets(10));
+        Label lbl = new Label();
+        TextField textField = new TextField();
+        textField.setPrefColumnCount(11);
+        Button btn = new Button("Click");
+        btn.setOnAction(event -> lbl.setText("Input: " + textField.getText()));
+        FlowPane root = new FlowPane(Orientation.VERTICAL, 10, 10, textField, btn, lbl);
         Scene scene = new Scene(root, 250, 200);
 
         stage.setScene(scene);
