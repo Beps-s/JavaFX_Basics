@@ -1,10 +1,13 @@
 package ee.khk;
 
 import javafx.application.Application;
+import javafx.geometry.Orientation;
 import javafx.scene.control.*;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
+import javafx.scene.control.MultipleSelectionModel;
+import javafx.scene.control.SelectionMode;
 
 public class Main extends Application {
 
@@ -33,7 +36,20 @@ public class Main extends Application {
         TreeView<String> langsTreeView = new TreeView<>(rootTreeNode);
         langsTreeView.setPrefSize(150, 200);
 
-        FlowPane root = new FlowPane(10, 10, langsTreeView);
+        MultipleSelectionModel<TreeItem<String>> selectionModel = langsTreeView.getSelectionModel();
+        selectionModel.setSelectionMode(SelectionMode.MULTIPLE);
+
+        Label lbl = new Label();
+        Button btn = new Button("Get Started");
+        btn.setOnAction(event -> {
+            String selected = "";
+            for (TreeItem<String> item : selectionModel.getSelectedItems()){
+                selected += item.getValue() + " ";
+            }
+            lbl.setText("Selected: " + selected);
+        });
+
+        FlowPane root = new FlowPane(Orientation.VERTICAL, 10, 10, langsTreeView, lbl, btn);
         Scene scene = new Scene(root, 300, 250);
         stage.setScene(scene);
         stage.setTitle("TreeView in JavaFX");
