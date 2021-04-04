@@ -1,6 +1,8 @@
 package ee.khk;
 
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Orientation;
 import javafx.scene.control.*;
 import javafx.scene.layout.FlowPane;
@@ -37,19 +39,16 @@ public class Main extends Application {
         langsTreeView.setPrefSize(150, 200);
 
         MultipleSelectionModel<TreeItem<String>> selectionModel = langsTreeView.getSelectionModel();
-        selectionModel.setSelectionMode(SelectionMode.MULTIPLE);
 
         Label lbl = new Label();
-        Button btn = new Button("Get Started");
-        btn.setOnAction(event -> {
-            String selected = "";
-            for (TreeItem<String> item : selectionModel.getSelectedItems()){
-                selected += item.getValue() + " ";
+        selectionModel.selectedItemProperty().addListener(new ChangeListener<TreeItem<String>>() {
+            @Override
+            public void changed(ObservableValue<? extends TreeItem<String>> observableValue, TreeItem<String> oldValue, TreeItem<String> newValue) {
+                lbl.setText("Selected: " + newValue.getValue());
             }
-            lbl.setText("Selected: " + selected);
         });
 
-        FlowPane root = new FlowPane(Orientation.VERTICAL, 10, 10, langsTreeView, lbl, btn);
+        FlowPane root = new FlowPane(Orientation.VERTICAL, 10, 10, langsTreeView, lbl);
         Scene scene = new Scene(root, 300, 250);
         stage.setScene(scene);
         stage.setTitle("TreeView in JavaFX");
