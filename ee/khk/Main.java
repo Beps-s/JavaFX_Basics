@@ -1,10 +1,7 @@
 package ee.khk;
 
 import javafx.application.Application;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.scene.control.*;
-import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
@@ -19,17 +16,27 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
 
-        ObservableList<String> langs = FXCollections.observableArrayList("Java", "JavaScript", "C#", "Python");
-        ChoiceBox<String> langsChoiceBox = new ChoiceBox<String>(langs);
-        langsChoiceBox.setValue("Java");
+        TreeItem<String> rootTreeNode = new TreeItem<>("Languages");
 
-        Label lbl = new Label();
-        langsChoiceBox.setOnAction(event -> lbl.setText(langsChoiceBox.getValue()));
+        TreeItem<String> germanics = new TreeItem<>("Germanic");
+        germanics.getChildren().add(new TreeItem<>("German"));
+        germanics.getChildren().add(new TreeItem<>("English"));
 
-        FlowPane root = new FlowPane(10, 10, langsChoiceBox, lbl);
+        TreeItem<String> romans = new TreeItem<>("Roman");
+        romans.getChildren().add(new TreeItem<>("French"));
+        romans.getChildren().add(new TreeItem<>("Spanish"));
+        romans.getChildren().add(new TreeItem<>("Italian"));
+
+        rootTreeNode.getChildren().add(germanics);
+        rootTreeNode.getChildren().add(romans);
+
+        TreeView<String> langsTreeView = new TreeView<>(rootTreeNode);
+        langsTreeView.setPrefSize(150, 200);
+
+        FlowPane root = new FlowPane(10, 10, langsTreeView);
         Scene scene = new Scene(root, 300, 250);
         stage.setScene(scene);
-        stage.setTitle("ChoiceBox in JavaFX");
+        stage.setTitle("TreeView in JavaFX");
         stage.show();
     }
 }
