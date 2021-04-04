@@ -1,15 +1,12 @@
 package ee.khk;
 
 import javafx.application.Application;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.geometry.Orientation;
 import javafx.scene.control.*;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.MultipleSelectionModel;
-import javafx.scene.control.SelectionMode;
 
 public class Main extends Application {
 
@@ -41,10 +38,15 @@ public class Main extends Application {
         MultipleSelectionModel<TreeItem<String>> selectionModel = langsTreeView.getSelectionModel();
 
         Label lbl = new Label();
-        selectionModel.selectedItemProperty().addListener(new ChangeListener<TreeItem<String>>() {
-            @Override
-            public void changed(ObservableValue<? extends TreeItem<String>> observableValue, TreeItem<String> oldValue, TreeItem<String> newValue) {
-                lbl.setText("Selected: " + newValue.getValue());
+        selectionModel.selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
+            if (newValue != null){
+                StringBuilder path = new StringBuilder(newValue.getValue());
+                TreeItem<String> parent = newValue.getParent();
+                while (parent != null){
+                    path.insert(0, parent.getValue() + " / ");
+                    parent = parent.getParent();
+                }
+                lbl.setText(path.toString());
             }
         });
 
