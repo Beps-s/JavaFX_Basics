@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.scene.control.Label;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 
@@ -22,8 +23,13 @@ public class Main extends Application {
 
         GridPane root = new GridPane();
         root.getColumnConstraints().add(new ColumnConstraints(80));
-        root.getColumnConstraints().add(new ColumnConstraints(150));
-        root.getColumnConstraints().add(new ColumnConstraints(70));
+        ColumnConstraints column2 = new ColumnConstraints(150, 150, Double.MAX_VALUE);
+        column2.setHgrow(Priority.ALWAYS);
+        root.getColumnConstraints().add(column2);
+
+        ColumnConstraints column3 = new ColumnConstraints(70, 70, Double.MAX_VALUE);
+        column3.setHgrow(Priority.ALWAYS);
+        root.getColumnConstraints().add(column3);
 
         root.setGridLinesVisible(true);
         root.setColumnIndex(first, 0);
