@@ -3,6 +3,7 @@ package ee.khk;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Orientation;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.FlowPane;
@@ -26,6 +27,7 @@ public class Main extends Application {
                 new Person("Alice", 29)
         );
 
+        Label lbl = new Label();
         TableView<Person> table = new TableView<>(people);
         table.setPrefHeight(200);
         table.setPrefWidth(250);
@@ -38,7 +40,12 @@ public class Main extends Application {
         ageColumn.setCellValueFactory(new PropertyValueFactory<>("age"));
         table.getColumns().add(ageColumn);
 
-        FlowPane root = new FlowPane(10, 10, table);
+        TableView.TableViewSelectionModel<Person> selectionModel = table.getSelectionModel();
+        selectionModel.selectedItemProperty().addListener((observableValue, oldVal, newVal) -> {
+            if (newVal != null) lbl.setText("Selected: " + newVal.getName());
+        });
+
+        FlowPane root = new FlowPane(Orientation.VERTICAL, 10, 10, lbl, table);
         Scene scene = new Scene(root, 300, 250);
         stage.setScene(scene);
         stage.setTitle("TableView in JavaFX");
