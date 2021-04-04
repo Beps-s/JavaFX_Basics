@@ -1,9 +1,8 @@
 package ee.khk;
 
 import javafx.application.Application;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.geometry.Orientation;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.*;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
@@ -19,30 +18,14 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
 
-        Label lbl = new Label("Value");
+        ObservableList<String> langs = FXCollections.observableArrayList("Java", "JavaScript", "C#", "Python");
+        ListView<String> langsListView = new ListView<String>(langs);
 
-        Slider slider = new Slider(0.0, 20.0, 10.0);
-        slider.setOrientation(Orientation.VERTICAL);
-
-        slider.setShowTickLabels(true);
-        slider.setShowTickMarks(true);
-        slider.setBlockIncrement(2.0);
-        slider.setMajorTickUnit(5.0);
-        slider.setMinorTickCount(4);
-        slider.setSnapToTicks(true);
-
-        slider.valueProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> changed, Number oldValue, Number newValue) {
-                lbl.setText("Slider value: " + newValue);
-            }
-        });
-
-        FlowPane root = new FlowPane(Orientation.VERTICAL, 10, 10, slider, lbl);
-        Scene scene = new Scene(root, 300, 250);
+        FlowPane root = new FlowPane(langsListView);
+        Scene scene = new Scene(root, 250, 200);
 
         stage.setScene(scene);
-        stage.setTitle("Slider in JavaFX");
+        stage.setTitle("ListView in JavaFX");
         stage.show();
     }
 }
