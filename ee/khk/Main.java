@@ -32,8 +32,13 @@ public class Main extends Application {
         column3.setHgrow(Priority.ALWAYS);
         root.getColumnConstraints().add(column3);
 
-        root.getRowConstraints().add(new RowConstraints(80));
-        root.getRowConstraints().add(new RowConstraints(80));
+        RowConstraints row1 = new RowConstraints(80, 80, Double.MAX_VALUE);
+        row1.setVgrow(Priority.ALWAYS);
+        RowConstraints row2 = new RowConstraints(80, 80, Double.MAX_VALUE);
+        row2.setVgrow(Priority.ALWAYS);
+
+        root.getRowConstraints().add(row1);
+        root.getRowConstraints().add(row2);
 
         root.setGridLinesVisible(true);
         root.add(first, 0, 0);
