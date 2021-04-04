@@ -3,13 +3,11 @@ package ee.khk;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.geometry.Orientation;
 import javafx.scene.control.*;
+import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
-
-import java.util.concurrent.Flow;
 
 public class Main extends Application {
 
@@ -22,17 +20,16 @@ public class Main extends Application {
     public void start(Stage stage) {
 
         ObservableList<String> langs = FXCollections.observableArrayList("Java", "JavaScript", "C#", "Python");
-        ComboBox<String> langsComboBox = new ComboBox<>(langs);
-        langsComboBox.setValue("Java");
+        ChoiceBox<String> langsChoiceBox = new ChoiceBox<String>(langs);
+        langsChoiceBox.setValue("Java");
 
         Label lbl = new Label();
+        langsChoiceBox.setOnAction(event -> lbl.setText(langsChoiceBox.getValue()));
 
-        langsComboBox.setOnAction(event -> lbl.setText(langsComboBox.getValue()));
-
-        FlowPane root = new FlowPane(10, 10, langsComboBox, lbl);
-        Scene scene = new Scene(root, 250, 200);
+        FlowPane root = new FlowPane(10, 10, langsChoiceBox, lbl);
+        Scene scene = new Scene(root, 300, 250);
         stage.setScene(scene);
-        stage.setTitle("ComboBox in JavaFX");
+        stage.setTitle("ChoiceBox in JavaFX");
         stage.show();
     }
 }
