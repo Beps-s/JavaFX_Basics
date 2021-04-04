@@ -1,9 +1,14 @@
 package ee.khk;
 
 import javafx.application.Application;
+import javafx.geometry.HPos;
+import javafx.geometry.Insets;
+import javafx.geometry.VPos;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
@@ -17,10 +22,26 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) {
-        Label first = new Label("First");
-        Label second = new Label("Second");
-        Label third = new Label("Third");
-        Label sixth = new Label("Sixth");
+        Button first = new Button("First");
+        GridPane.setHalignment(first, HPos.RIGHT);
+        GridPane.setValignment(first, VPos.BOTTOM);
+
+        Button second = new Button("Second");
+        second.setMaxWidth(Double.MAX_VALUE);
+        GridPane.setHgrow(second, Priority.ALWAYS);
+
+        Button third = new Button("Third");
+        third.setMaxWidth(Double.MAX_VALUE);
+        third.setMaxHeight(Double.MAX_VALUE);
+        GridPane.setHgrow(third, Priority.ALWAYS);
+        GridPane.setVgrow(third, Priority.ALWAYS);
+
+        Button fourth = new Button("Fourth");
+        fourth.setMaxWidth(Double.MAX_VALUE);
+        fourth.setMaxHeight(Double.MAX_VALUE);
+        GridPane.setHgrow(fourth, Priority.ALWAYS);
+        GridPane.setVgrow(fourth, Priority.ALWAYS);
+        GridPane.setMargin(fourth, new Insets(10));
 
         GridPane root = new GridPane();
 
@@ -44,7 +65,7 @@ public class Main extends Application {
         root.add(first, 0, 0);
         root.add(second, 0, 1);
         root.add(third, 1, 0);
-        root.add(sixth, 1, 1);
+        root.add(fourth, 1, 1);
 
 
         Scene scene = new Scene(root, 300, 200);
