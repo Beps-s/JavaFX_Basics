@@ -25,14 +25,13 @@ public class Main extends Application {
         ListView<String> langsListView = new ListView<>(langs);
         langsListView.setPrefSize(250, 150);
 
-        Button addbtn = new Button("Add");
-        Button deleteBtn = new Button("Delete");
-        FlowPane buttonPane = new FlowPane(10, 10, textField, addbtn, deleteBtn);
+        Button btn = new Button("Change");
+        btn.setOnAction(event -> {
+            ObservableList<String> newLangs = FXCollections.observableArrayList("PHP", "Go", "C++");
+            langsListView.setItems(newLangs);
+        });
 
-        addbtn.setOnAction(event -> langs.add(textField.getText()));
-        deleteBtn.setOnAction(event -> langs.remove(textField.getText()));
-
-        FlowPane root = new FlowPane(Orientation.VERTICAL, 10, 10, buttonPane, langsListView);
+        FlowPane root = new FlowPane(Orientation.VERTICAL, 10, 10, btn, langsListView);
         Scene scene = new Scene(root, 250, 200);
 
         stage.setScene(scene);
