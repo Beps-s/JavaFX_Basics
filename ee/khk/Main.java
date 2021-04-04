@@ -29,10 +29,14 @@ public class Main extends Application {
         slider.setMinorTickCount(4);
         slider.setSnapToTicks(true);
 
-        Button btn = new Button("Click");
-        btn.setOnAction(event -> lbl.setText("Slider value: " + slider.getValue()));
+        slider.valueProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> changed, Number oldValue, Number newValue) {
+                lbl.setText("Slider value: " + newValue);
+            }
+        });
 
-        FlowPane root = new FlowPane(Orientation.VERTICAL, 10, 10, slider, lbl, btn);
+        FlowPane root = new FlowPane(Orientation.VERTICAL, 10, 10, slider, lbl);
         Scene scene = new Scene(root, 300, 250);
 
         stage.setScene(scene);
