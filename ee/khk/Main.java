@@ -4,7 +4,6 @@ import javafx.application.Application;
 import javafx.scene.control.Label;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
@@ -24,20 +23,25 @@ public class Main extends Application {
         Label sixth = new Label("Sixth");
 
         GridPane root = new GridPane();
-        root.getColumnConstraints().add(new ColumnConstraints(80));
-        ColumnConstraints column2 = new ColumnConstraints(150, 150, Double.MAX_VALUE);
-        column2.setHgrow(Priority.ALWAYS);
+
+        ColumnConstraints column1 = new ColumnConstraints();
+        column1.setPercentWidth(30);
+        root.getColumnConstraints().add(column1);
+
+        ColumnConstraints column2 = new ColumnConstraints();
+        column2.setPercentWidth(40);
         root.getColumnConstraints().add(column2);
-        ColumnConstraints column3 = new ColumnConstraints(70, 70, Double.MAX_VALUE);
-        column3.setHgrow(Priority.ALWAYS);
+
+        ColumnConstraints column3 = new ColumnConstraints();
+        column3.setPercentWidth(30);
         root.getColumnConstraints().add(column3);
 
-        RowConstraints row1 = new RowConstraints(80, 80, Double.MAX_VALUE);
-        row1.setVgrow(Priority.ALWAYS);
-        RowConstraints row2 = new RowConstraints(80, 80, Double.MAX_VALUE);
-        row2.setVgrow(Priority.ALWAYS);
-
+        RowConstraints row1 = new RowConstraints();
+        row1.setPercentHeight(55);
         root.getRowConstraints().add(row1);
+
+        RowConstraints row2 = new RowConstraints();
+        row2.setPercentHeight(45);
         root.getRowConstraints().add(row2);
 
         root.setGridLinesVisible(true);
