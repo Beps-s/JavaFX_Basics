@@ -9,6 +9,8 @@ import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 
+import java.util.concurrent.Flow;
+
 public class Main extends Application {
 
     public static void main(String[] args) {
@@ -19,23 +21,18 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
 
-        TextField textField = new TextField();
-
         ObservableList<String> langs = FXCollections.observableArrayList("Java", "JavaScript", "C#", "Python");
-        ListView<String> langsListView = new ListView<>(langs);
-        langsListView.setPrefSize(250, 150);
+        ComboBox<String> langsComboBox = new ComboBox<>(langs);
+        langsComboBox.setValue("Java");
 
-        Button btn = new Button("Change");
-        btn.setOnAction(event -> {
-            ObservableList<String> newLangs = FXCollections.observableArrayList("PHP", "Go", "C++");
-            langsListView.setItems(newLangs);
-        });
+        Label lbl = new Label();
 
-        FlowPane root = new FlowPane(Orientation.VERTICAL, 10, 10, btn, langsListView);
+        langsComboBox.setOnAction(event -> lbl.setText(langsComboBox.getValue()));
+
+        FlowPane root = new FlowPane(10, 10, langsComboBox, lbl);
         Scene scene = new Scene(root, 250, 200);
-
         stage.setScene(scene);
-        stage.setTitle("ListView in JavaFX");
+        stage.setTitle("ComboBox in JavaFX");
         stage.show();
     }
 }
